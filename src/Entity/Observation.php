@@ -38,6 +38,12 @@ class Observation
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\bioagresseur", inversedBy="observations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $bioagresseurs;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +93,18 @@ class Observation
     public function setUser(?user $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBioagresseurs(): ?bioagresseur
+    {
+        return $this->bioagresseurs;
+    }
+
+    public function setBioagresseurs(?bioagresseur $bioagresseurs): self
+    {
+        $this->bioagresseurs = $bioagresseurs;
 
         return $this;
     }

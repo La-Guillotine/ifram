@@ -62,11 +62,17 @@ abstract class Bioagresseur
      */
     private $traitements;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Observation", mappedBy="bioagresseurs", orphanRemoval=true)
+     */
+    private $observations;
+
     public function __construct()
     {
         $this->plantes_sensibles = new ArrayCollection();
         $this->organes = new ArrayCollection();
         $this->traitements = new ArrayCollection();
+        $this->observations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -213,6 +219,37 @@ abstract class Bioagresseur
         if ($this->traitements->contains($traitement)) {
             $this->traitements->removeElement($traitement);
             $traitement->removeBioagresseur($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Observation[]
+     */
+    public function getObservations(): Collection
+    {
+        return $this->observations;
+    }
+
+    public function addObservation(Observation $observation): self
+    {
+        if (!$this->observations->contains($observation)) {
+            $this->observations[] = $observation;
+            $observation->setBioagresseurs($this);
+        }
+
+        return $this;
+    }
+
+    public function removeObservation(Observation $observation): self
+    {
+        if ($this->observations->contains($observation)) {
+            $this->observations->removeElement($observation);
+            // set the owning side to null (unless already changed)
+            if ($observation->getBioagresseurs() === $this) {
+                $observation->setBioagresseurs(null);
+            }
         }
 
         return $this;
