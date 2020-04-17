@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maladie index{% endblock %}
+
+{% block body %}
+    <h1>Maladie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Type</th>
+                <th>Periodesrisques</th>
+                <th>Symptomes</th>
+                <th>Stadesensible</th>
+                <th>Conditionsfavorables</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for maladie in maladies %}
+            <tr>
+                <td>{{ maladie.id }}</td>
+                <td>{{ maladie.nom }}</td>
+                <td>{{ maladie.type }}</td>
+                <td>{{ maladie.periodesrisques }}</td>
+                <td>{{ maladie.symptomes }}</td>
+                <td>{{ maladie.stadesensible }}</td>
+                <td>{{ maladie.conditionsfavorables }}</td>
+                <td>
+                    <a href="{{ path('maladie_show', {'id': maladie.id}) }}">show</a>
+                    <a href="{{ path('maladie_edit', {'id': maladie.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('maladie_new') }}">Create new</a>
+{% endblock %}

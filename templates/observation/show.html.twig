@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Observation{% endblock %}
+
+{% block body %}
+    <h1>Observation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ observation.id }}</td>
+            </tr>
+            <tr>
+                <th>Coordonnees</th>
+                <td>{{ observation.coordonnees }}</td>
+            </tr>
+            <tr>
+                <th>Descriptif</th>
+                <td>{{ observation.descriptif }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('observation_index') }}">back to list</a>
+
+    <a href="{{ path('observation_edit', {'id': observation.id}) }}">edit</a>
+
+    {{ include('observation/_delete_form.html.twig') }}
+{% endblock %}
