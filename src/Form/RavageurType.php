@@ -22,7 +22,6 @@ class RavageurType extends AbstractType
             ->add('plantes_sensibles')
             ->add('organes')
             ->add('traitements')
-            ->add('bioagresseur')
         ;
     }
 

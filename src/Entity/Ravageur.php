@@ -10,12 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Ravageur extends Bioagresseur
 {
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\bioagresseur", inversedBy="ravageurs")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $bioagresseur;
-
-    /**
      * @ORM\Column(type="string", length=40)
      */
     private $stadeactif;
@@ -50,15 +44,4 @@ class Ravageur extends Bioagresseur
         return $this;
     }
 
-    public function getBioagresseur(): ?bioagresseur
-    {
-        return $this->bioagresseur;
-    }
-
-    public function setBioagresseur(?bioagresseur $bioagresseur): self
-    {
-        $this->bioagresseur = $bioagresseur;
-
-        return $this;
-    }
 }

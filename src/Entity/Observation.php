@@ -33,7 +33,7 @@ class Observation
     private $descriptif;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="observations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="observations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;

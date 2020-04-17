@@ -48,16 +48,6 @@ abstract class Bioagresseur
     private $stadesensible;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Maladie", mappedBy="bioagresseur", orphanRemoval=true)
-     */
-    private $maladies;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Ravageur", mappedBy="bioagresseur", orphanRemoval=true)
-     */
-    private $ravageurs;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Plante", mappedBy="sensible")
      */
     private $plantes_sensibles;
@@ -74,8 +64,6 @@ abstract class Bioagresseur
 
     public function __construct()
     {
-        $this->maladies = new ArrayCollection();
-        $this->ravageurs = new ArrayCollection();
         $this->plantes_sensibles = new ArrayCollection();
         $this->organes = new ArrayCollection();
         $this->traitements = new ArrayCollection();
@@ -144,69 +132,7 @@ abstract class Bioagresseur
         $this->stadesensible = $stadesensible;
 
         return $this;
-    }
-
-    /**
-     * @return Collection|Maladie[]
-     */
-    public function getMaladies(): Collection
-    {
-        return $this->maladies;
-    }
-
-    public function addMalady(Maladie $malady): self
-    {
-        if (!$this->maladies->contains($malady)) {
-            $this->maladies[] = $malady;
-            $malady->setBioagresseur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMalady(Maladie $malady): self
-    {
-        if ($this->maladies->contains($malady)) {
-            $this->maladies->removeElement($malady);
-            // set the owning side to null (unless already changed)
-            if ($malady->getBioagresseur() === $this) {
-                $malady->setBioagresseur(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Ravageur[]
-     */
-    public function getRavageurs(): Collection
-    {
-        return $this->ravageurs;
-    }
-
-    public function addRavageur(Ravageur $ravageur): self
-    {
-        if (!$this->ravageurs->contains($ravageur)) {
-            $this->ravageurs[] = $ravageur;
-            $ravageur->setBioagresseur($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRavageur(Ravageur $ravageur): self
-    {
-        if ($this->ravageurs->contains($ravageur)) {
-            $this->ravageurs->removeElement($ravageur);
-            // set the owning side to null (unless already changed)
-            if ($ravageur->getBioagresseur() === $this) {
-                $ravageur->setBioagresseur(null);
-            }
-        }
-
-        return $this;
-    }
+    }   
 
     /**
      * @return Collection|Plante[]

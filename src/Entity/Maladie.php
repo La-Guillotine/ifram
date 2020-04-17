@@ -15,12 +15,6 @@ class Maladie extends Bioagresseur
      */
     private $conditionsfavorables;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\bioagresseur", inversedBy="maladies")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $bioagresseur;
-
     public function getConditionsfavorables(): ?string
     {
         return $this->conditionsfavorables;
@@ -33,15 +27,4 @@ class Maladie extends Bioagresseur
         return $this;
     }
 
-    public function getBioagresseur(): ?bioagresseur
-    {
-        return $this->bioagresseur;
-    }
-
-    public function setBioagresseur(?bioagresseur $bioagresseur): self
-    {
-        $this->bioagresseur = $bioagresseur;
-
-        return $this;
-    }
 }
