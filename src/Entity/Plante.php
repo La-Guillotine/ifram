@@ -29,7 +29,7 @@ class Plante
     private $descriptif;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\bioagresseur", inversedBy="plantes_sensibles")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Bioagresseur", inversedBy="plantes_sensibles")
      */
     private $sensible;
 
