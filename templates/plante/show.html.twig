@@ -1,30 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Plante{% endblock %}
+{% block title %} {{ plante.nom }} {% endblock %}
 
 {% block body %}
-    <h1>Plante</h1>
+    <h1> {{ plante.nom }} </h1>
+    <div class="card mt-5 container">
+        <div class="card-body">
+            <p>{{ plante.descriptif }}</p>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ plante.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ plante.nom }}</td>
-            </tr>
-            <tr>
-                <th>Descriptif</th>
-                <td>{{ plante.descriptif }}</td>
-            </tr>
-        </tbody>
-    </table>
+            <div class="card mb-2">
+                <div class="card-header"><p class="card-subtitle">Maladies auxquelles cette plante peut-être affectée </p></div>
+                <ul class="list-group list-group-flush">
+                {% for maladie in plante.sensible %}
+                    <a class="card-link list-group-item" href="{{ path('maladie_show', {'id': maladie.id}) }}"> {{ maladie.nom }} </a>
+                {% else %}
+                    Aucune
+                {% endfor %}
+                </ul>
+            </div>
 
-    <a href="{{ path('plante_index') }}">back to list</a>
+            <div class="card">
+                <div class="card-header">
+                    <p>Ravageurs susceptibles de nuire au bien être de cette plante</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                {% for ravageur in plante.sensible %}
+                    <a class="card-link list-group-item" href="{{ path('ravageur_show', {'id':ravageur.id}) }}"> {{ ravageur.nom }} </a>
+                {% else %}
+                    Aucune
+                {% endfor %}
+                </ul>
+            </div>
 
-    <a href="{{ path('plante_edit', {'id': plante.id}) }}">edit</a>
+            <a class="btn btn-primary card-link" href="{{ path('plante_index') }}">Retour à la liste des plantes</a>
+            <a class="btn btn-secondary card-link" href="{{ path('plante_edit', {'id': plante.id}) }}">Modifier</a>
+            
 
-    {{ include('plante/_delete_form.html.twig') }}
+        </div>
+    </div>
+    <div class="container">{{ include('plante/_delete_form.html.twig') }}</div>
+
 {% endblock %}
