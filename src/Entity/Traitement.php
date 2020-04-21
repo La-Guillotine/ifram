@@ -29,7 +29,7 @@ class Traitement
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\bioagresseur", inversedBy="traitements")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Bioagresseur", inversedBy="traitements")
      */
     private $bioagresseurs;
 

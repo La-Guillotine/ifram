@@ -24,7 +24,7 @@ class Organe
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\bioagresseur", inversedBy="organes")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Bioagresseur", inversedBy="organes")
      */
     private $bioagresseurs;
 

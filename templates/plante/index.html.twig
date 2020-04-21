@@ -1,37 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Plante index{% endblock %}
+{% block title %}Plantes{% endblock %}
 
 {% block body %}
     <h1>Plante index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Descriptif</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for plante in plantes %}
-            <tr>
-                <td>{{ plante.id }}</td>
-                <td>{{ plante.nom }}</td>
-                <td>{{ plante.descriptif }}</td>
-                <td>
-                    <a href="{{ path('plante_show', {'id': plante.id}) }}">show</a>
-                    <a href="{{ path('plante_edit', {'id': plante.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('plante_new') }}">Create new</a>
+    <div class="container">
+        <ul class="table">
+            {% for plante in plantes %}
+                <li class="cart">
+                    <a href="{{ path('plante_show', {'id': plante.id}) }}">{{plante.nom}}</a>
+                </li>
+            {% else %}
+                <p>no records found</p>
+            {% endfor %}
+        </ul>
+    </div>
+    <a class="btn btn-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
 {% endblock %}

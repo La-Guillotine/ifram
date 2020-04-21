@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Plante;
+use App\Entity\Bioagresseur;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -14,7 +16,10 @@ class PlanteType extends AbstractType
         $builder
             ->add('nom')
             ->add('descriptif')
-            ->add('sensible')
+            ->add('sensible', ChoiceType::class,[
+                'label' => 'Bioagresseurs',
+                'choice_label' => 'nom'
+            ])
         ;
     }
 
