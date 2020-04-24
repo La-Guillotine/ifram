@@ -1,10 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Plante index{% endblock %}
+{% block title %}Plantes{% endblock %}
 
 {% block body %}
     <h1>Plante index</h1>
-    <div class="container">
+    {{plantes|length}}
+    <div class="listPlantes">
+        <select>
+            <option autofocus>Please choose an option</option>
+            {% for plante in plantes %}
+                {% set entryInfo = {
+                    id: plante.id,
+                    nom: plante.nom
+                } %}
+                <option value="{{plante.id}}" data-plante='{{entryInfo|json_encode|raw}}'>{{plante.nom}}</option>
+            {% else %}
+            <option value="0">no records found</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="descPlantes card">
+        <h5 class="card-title nomPlante"></h5>
+        <div class="card-body">
+            <p></p>
+
+            <div class="card maladies">
+                <h6 class="card-title">Maladies</h56>
+            </div>
+            <div class="card ravageurs">
+                <h6 class="card-title">Ravageur</h6>
+            </div>
+        </div>
+    </div>
+    <!--<div class="container">
         <table class="table">
             {% for plante in plantes %}
                 <tr>
@@ -21,5 +49,6 @@
         </table>
 
         <a class="btn btn-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
-    </div>
+    </div>-->
+    <a class="btn btn-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
 {% endblock %}
