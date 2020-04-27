@@ -1,17 +1,25 @@
-{% extends 'base.html.twig' %}
+{% extends 'plante/index.html.twig' %}
 
 {% block title %} {{ plante.nom }} {% endblock %}
 
-{% block body %}
-    <h1> {{ plante.nom }} </h1>
-    <div class="card mt-5 container">
+{% block descPlantes %}
+    <div class="card descPlantes">
+        <h1 class="card-title"> {{ plante.nom }} </h1>
         <div class="card-body">
             <p>{{ plante.descriptif }}</p>
+        {% set maladies,ravageurs = [],[] %}
+        {% for bio in plante.sensible %}
+            {% if bio.instanceofMaladie %}
+                {% set maladies = [bio] %}
+            {% else %}
+                {% set ravageurs = [bio] %}
+            {% endif %}
+        {% endfor %}
 
             <div class="card mb-2">
                 <div class="card-header"><p class="card-subtitle">Maladies auxquelles cette plante peut-être affectée </p></div>
                 <ul class="list-group list-group-flush">
-                {% for maladie in plante.sensible %}
+                {% for maladie in maladies %}
                     <a class="card-link list-group-item" href="{{ path('maladie_show', {'id': maladie.id}) }}"> {{ maladie.nom }} </a>
                 {% else %}
                     Aucune
@@ -24,7 +32,7 @@
                     <p>Ravageurs susceptibles de nuire au bien être de cette plante</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                {% for ravageur in plante.sensible %}
+                {% for ravageur in ravageurs %}
                     <a class="card-link list-group-item" href="{{ path('ravageur_show', {'id':ravageur.id}) }}"> {{ ravageur.nom }} </a>
                 {% else %}
                     Aucune
@@ -32,12 +40,13 @@
                 </ul>
             </div>
 
-            <a class="btn btn-primary card-link" href="{{ path('plante_index') }}">Retour à la liste des plantes</a>
+            {# <a class="btn btn-primary card-link" href="{{ path('plante_index') }}">Retour à la liste des plantes</a> #}
             <a class="btn btn-secondary card-link" href="{{ path('plante_edit', {'id': plante.id}) }}">Modifier</a>
             
 
         </div>
+        <div class="container">{{ include('plante/_delete_form.html.twig') }}</div>
     </div>
-    <div class="container">{{ include('plante/_delete_form.html.twig') }}</div>
+    
 
 {% endblock %}

@@ -51,10 +51,11 @@ class PlanteController extends AbstractController
     /**
      * @Route("/{id}", name="plante_show", methods={"GET"})
      */
-    public function show(Plante $plante): Response
+    public function show(PlanteRepository $planteRepository, Plante $plante): Response
     {
         return $this->render('plante/show.html.twig', [
             'plante' => $plante,
+            'plantes' => $planteRepository->findAll()
         ]);
     }
 

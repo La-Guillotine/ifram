@@ -1,0 +1,14 @@
+#plantes{
+    margin-top : 1vh;
+    display :flex;
+    flex-direction:row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+}
+
+.listPlantes{
+    flex-grow : 1;
+}
+.descPlantes{
+    flex-grow : 4;
+}

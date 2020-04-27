@@ -254,4 +254,8 @@ abstract class Bioagresseur
 
         return $this;
     }
+
+    public function isInstanceOfMaladie() {
+        return $this instanceof Maladie;
+    }
 }

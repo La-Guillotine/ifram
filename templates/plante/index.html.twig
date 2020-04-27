@@ -2,53 +2,28 @@
 
 {% block title %}Plantes{% endblock %}
 
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/plantes.css') }}" />{% endblock %}
 {% block body %}
-    <h1>Plante index</h1>
-    {{plantes|length}}
-    <div class="listPlantes">
-        <select>
-            <option autofocus>Please choose an option</option>
-            {% for plante in plantes %}
-                {% set entryInfo = {
-                    id: plante.id,
-                    nom: plante.nom
-                } %}
-                <option value="{{plante.id}}" data-plante='{{entryInfo|json_encode|raw}}'>{{plante.nom}}</option>
-            {% else %}
-            <option value="0">no records found</option>
-            {% endfor %}
-        </select>
-    </div>
-    <div class="descPlantes card">
-        <h5 class="card-title nomPlante"></h5>
-        <div class="card-body">
-            <p></p>
-
-            <div class="card maladies">
-                <h6 class="card-title">Maladies</h56>
-            </div>
-            <div class="card ravageurs">
-                <h6 class="card-title">Ravageur</h6>
-            </div>
+    
+    <div class="container-fluid" id="plantes">
+        <div class="listPlantes">
+            <ul>
+                {% for plante in plantes %}
+                {#  {% set entryInfo = {
+                        id: plante.id,
+                        nom: plante.nom,
+                        sensible:plante.sensible
+                    } %} #}
+                    <li {# data-plante={{entryInfo|json_encode|raw}} #}>
+                        <a class="card-link" href="{{ path('plante_show', {'id': plante.id}) }}">{{ plante.nom }}</a>
+                    </li>
+                {% else %}
+                <li value="0">no records found</li>
+                {% endfor %}
+            </ul>
         </div>
+        {% block descPlantes %}{% endblock %}
+        
     </div>
-    <!--<div class="container">
-        <table class="table">
-            {% for plante in plantes %}
-                <tr>
-                    <td><a class="btn" href="{{ path('plante_show', {'id': plante.id}) }}"><u>{{ plante.nom }}</u></a></td>
-                    <td>
-                        <a class="btn btn-secondary" href="{{ path('plante_edit', {'id': plante.id}) }}">Modifier</a>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="4">no records found</td>
-                </tr>
-            {% endfor %}
-        </table>
-
-        <a class="btn btn-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
-    </div>-->
     <a class="btn btn-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
 {% endblock %}

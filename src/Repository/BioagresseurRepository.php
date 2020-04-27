@@ -34,7 +34,7 @@ class BioagresseurRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Bioagresseur
