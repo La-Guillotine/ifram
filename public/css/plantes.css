@@ -12,3 +12,14 @@
 .descPlantes{
     flex-grow : 4;
 }
+
+.bio{
+    display : flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    justify-content: space-around;
+}
+.bio .card{
+    min-width:20vw;
+}

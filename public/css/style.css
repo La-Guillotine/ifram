@@ -5,3 +5,7 @@ h1{
 select{
     min-width:10vw;
 }
+
+form label{
+    margin-right: 1vw;
+}

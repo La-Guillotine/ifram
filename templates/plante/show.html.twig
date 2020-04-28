@@ -1,45 +1,43 @@
-{% extends 'plante/index.html.twig' %}
 
-{% block title %} {{ plante.nom }} {% endblock %}
-
-{% block descPlantes %}
-    <div class="card descPlantes">
+    <div class="card">
         <h1 class="card-title"> {{ plante.nom }} </h1>
         <div class="card-body">
             <p>{{ plante.descriptif }}</p>
-        {% set maladies,ravageurs = [],[] %}
-        {% for bio in plante.sensible %}
-            {% if bio.instanceofMaladie %}
-                {% set maladies = [bio] %}
-            {% else %}
-                {% set ravageurs = [bio] %}
-            {% endif %}
-        {% endfor %}
 
-            <div class="card mb-2">
-                <div class="card-header"><p class="card-subtitle">Maladies auxquelles cette plante peut-être affectée </p></div>
-                <ul class="list-group list-group-flush">
-                {% for maladie in maladies %}
-                    <a class="card-link list-group-item" href="{{ path('maladie_show', {'id': maladie.id}) }}"> {{ maladie.nom }} </a>
+            {% set maladies,ravageurs = [],[] %}
+            {% for bio in plante.sensible %}
+                {% if bio.instanceofMaladie %}
+                    {% set maladies = [bio] %}
                 {% else %}
-                    Aucune
-                {% endfor %}
-                </ul>
-            </div>
+                    {% set ravageurs = [bio] %}
+                {% endif %}
+            {% endfor %}
 
-            <div class="card">
-                <div class="card-header">
-                    <p>Ravageurs susceptibles de nuire au bien être de cette plante</p>
+            <div class="bio">
+                <div class="card" id="card-maladie">
+                    <div class="card-header"><p class="card-subtitle">Maladies</p></div>
+                    <ul class="list-group list-group-flush">
+                    {% for maladie in maladies %}
+                        <a class="card-link list-group-item" href="{{ path('maladie_show', {'id': maladie.id}) }}"> {{ maladie.nom }} </a>
+                    {% else %}
+                        <p>Aucune</p>
+                    {% endfor %}
+                    </ul>
                 </div>
-                <ul class="list-group list-group-flush">
-                {% for ravageur in ravageurs %}
-                    <a class="card-link list-group-item" href="{{ path('ravageur_show', {'id':ravageur.id}) }}"> {{ ravageur.nom }} </a>
-                {% else %}
-                    Aucune
-                {% endfor %}
-                </ul>
-            </div>
 
+                <div class="card" id="card-ravageur">
+                    <div class="card-header">
+                        <p class="card-subtitle">Ravageurs</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                    {% for ravageur in ravageurs %}
+                        <a class="card-link list-group-item" href="{{ path('ravageur_show', {'id':ravageur.id}) }}"> {{ ravageur.nom }} </a>
+                    {% else %}
+                        <p>Aucune</p>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
             {# <a class="btn btn-primary card-link" href="{{ path('plante_index') }}">Retour à la liste des plantes</a> #}
             <a class="btn btn-secondary card-link" href="{{ path('plante_edit', {'id': plante.id}) }}">Modifier</a>
             
@@ -48,5 +46,3 @@
         <div class="container">{{ include('plante/_delete_form.html.twig') }}</div>
     </div>
     
-
-{% endblock %}

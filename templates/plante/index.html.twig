@@ -7,23 +7,29 @@
     
     <div class="container-fluid" id="plantes">
         <div class="listPlantes">
-            <ul>
+        <!-- list-group -->
+            <div class="list-group" id="myList" role="tablist">
                 {% for plante in plantes %}
-                {#  {% set entryInfo = {
-                        id: plante.id,
-                        nom: plante.nom,
-                        sensible:plante.sensible
-                    } %} #}
-                    <li {# data-plante={{entryInfo|json_encode|raw}} #}>
-                        <a class="card-link" href="{{ path('plante_show', {'id': plante.id}) }}">{{ plante.nom }}</a>
-                    </li>
+                    {# <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" href="{{ path('plante_show', {'id': plante.id}) }}"> #}
+                    <a class="list-group-item list-group-item-action" data-toggle="list" role="tab" href="#{{plante.nom}}">   
+                        {{ plante.nom }}
+                    </a>
                 {% else %}
-                <li value="0">no records found</li>
+                    <p>no records found</p>
                 {% endfor %}
-            </ul>
+            </div>
+            
         </div>
-        {% block descPlantes %}{% endblock %}
+        <!-- Tab panes -->
+        <div class="tab-content descPlantes">
+            {% for plante in plantes %}
+                <div class="tab-pane" id="{{plante.nom}}" role="tabpanel">
+                    {{ include('plante/show.html.twig') }}
+                </div>
+            {% endfor %}
+        </div>
         
     </div>
+</div>
     <a class="btn btn-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
 {% endblock %}

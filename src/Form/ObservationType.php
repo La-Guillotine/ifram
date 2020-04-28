@@ -14,8 +14,8 @@ class ObservationType extends AbstractType
         $builder
             ->add('coordonnees')
             ->add('descriptif')
-            ->add('plante')
-            ->add('user')
+            // ->add('plante')
+            // ->add('user')
         ;
     }
 

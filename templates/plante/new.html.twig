@@ -3,9 +3,13 @@
 {% block title %}New Plante{% endblock %}
 
 {% block body %}
-    <h1>Create new Plante</h1>
-
-    {{ include('plante/_form.html.twig') }}
-
-    <a href="{{ path('plante_index') }}">back to list</a>
+    <div class="card mt-2 justify-content-center">
+        <div class="card-header success">
+            <h3 class="card-title">Ajouter une plante</h3>
+        </div>
+        <div class="card-body col-md-6">
+            {{ include('plante/_form.html.twig') }}
+        </div>
+    </div>
+    <a class="btn btn-primary" href="{{ path('plante_index') }}">Retour à la liste des plantes</a>
 {% endblock %}

@@ -17,7 +17,7 @@ class Observation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\plante", inversedBy="observations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Plante", inversedBy="observations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $plante;
@@ -39,7 +39,7 @@ class Observation
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\bioagresseur", inversedBy="observations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bioagresseur", inversedBy="observations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $bioagresseurs;
