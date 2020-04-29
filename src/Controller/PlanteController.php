@@ -38,13 +38,7 @@ class PlanteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $planteFile = $form->get('image')->getData();
 
-            // $fileName = $this->generateUniqueFileName().'.'.$planteFile->guessExtension();
-
-            // // moves the file to the directory where brochures are stored
-            // $planteFile->move(
-            //     $this->getParameter('plantes_directory'),
-            //     $fileName
-            // );
+            //fait appel au service d'upload de fichier
             $fileName = $fileUploader->upload($planteFile);
             // updates the 'image' property to store the PDF file name
             // instead of its contents
@@ -77,14 +71,27 @@ class PlanteController extends AbstractController
     /**
      * @Route("/{id}/edit", name="plante_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Plante $plante): Response
+    public function edit(Request $request, Plante $plante, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(PlanteType::class, $plante);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if($plante->getImage() != $form->get('image')->getData()){
-                echo 'je passe';
+            $image = $plante->getImage();
+            $planteFile = $form->get('image')->getData();
+           
+            if($image != null || $planteFile != null){
+                try{
+                    if($image != null){
+                        $fileUploader->removeUpload($image);
+                    }
+                    
+                    $fileName = $fileUploader->upload($planteFile);
+                    $plante->setImage($fileName);
+                }
+                catch(Exception $e){
+                    return $e->getMessage();
+                }
             }
 
             $this->getDoctrine()->getManager()->flush();

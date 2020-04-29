@@ -24,6 +24,7 @@ class PlanteType extends AbstractType
             ->add('image',FileType::class,[
                 'label' => 'Photo de la plante',
                 'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '1024k',

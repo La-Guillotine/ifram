@@ -22,6 +22,14 @@ class FileUploader
         return $fileName;
     }
 
+    public function removeUpload($file)
+    {
+        $file = $this->getTargetDirectory() . '/' . $file;
+        if (file_exists($file)) {
+            unlink($file);
+        }
+    }
+
     public function getTargetDirectory()
     {
         return $this->targetDirectory;
