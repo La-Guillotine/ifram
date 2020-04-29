@@ -19,7 +19,7 @@ class PlanteType extends AbstractType
         $builder
             ->add('nom')
             ->add('descriptif', TextAreaType::class,[
-
+                'label' => 'Description'
             ])
             ->add('image',FileType::class,[
                 'label' => 'Photo de la plante',
