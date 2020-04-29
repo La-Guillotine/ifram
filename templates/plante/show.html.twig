@@ -2,6 +2,9 @@
     <div class="card">
         <h1 class="card-title"> {{ plante.nom }} </h1>
         <div class="card-body">
+            {% if plante.image %}
+                <img src="{{ asset('uploads/plantes/' ~ plante.image) }}" alt="image de la plante">
+            {% endif %}
             <p>{{ plante.descriptif }}</p>
 
             {% set maladies,ravageurs = [],[] %}
