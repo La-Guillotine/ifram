@@ -4,13 +4,16 @@
     flex-direction:row;
     flex-wrap: nowrap;
     align-items: baseline;
+    justify-content: space-around;
 }
 
 .listPlantes{
     flex-grow : 1;
+    max-width:10vw;
 }
 .descPlantes{
     flex-grow : 4;
+    max-width: 70vw;
 }
 
 .bio{
@@ -22,4 +25,15 @@
 }
 .bio .card{
     min-width:20vw;
+}
+
+.img_plante{
+    display : flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img_plante img{
+    justify-content: center;
+    max-width:25vw;
 }

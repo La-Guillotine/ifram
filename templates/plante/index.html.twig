@@ -18,7 +18,9 @@
                     <p>no records found</p>
                 {% endfor %}
             </div>
-            
+            <div class="container-fluid mt-5">
+                <a class="btn btn-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
+            </div>
         </div>
         <!-- Tab panes -->
         <div class="tab-content descPlantes">
@@ -31,5 +33,5 @@
         
     </div>
 </div>
-    <a class="btn btn-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
+    
 {% endblock %}

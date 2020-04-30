@@ -1,9 +1,14 @@
 
     <div class="card">
-        <h1 class="card-title"> {{ plante.nom }} </h1>
+        <div class="card-header">
+            <h1 class="card-title"> {{ plante.nom }} </h1>
+            
+        </div>
         <div class="card-body">
             {% if plante.image %}
-                <img src="{{ asset('uploads/plantes/' ~ plante.image) }}" alt="image de la plante">
+                <div class="img_plante">
+                    <img class="img-fluid rounded img-responsive" src="{{ asset('uploads/plantes/' ~ plante.image) }}" alt="image de la plante">
+                </div>
             {% endif %}
             <p>{{ plante.descriptif }}</p>
 
@@ -41,11 +46,12 @@
                     </ul>
                 </div>
             </div>
-            {# <a class="btn btn-primary card-link" href="{{ path('plante_index') }}">Retour à la liste des plantes</a> #}
-            <a class="btn btn-secondary card-link" href="{{ path('plante_edit', {'id': plante.id}) }}">Modifier</a>
-            
-
+            {# liens #}
+            <a class="btn btn-secondary card-link mt-2" href="{{ path('plante_edit', {'id': plante.id}) }}">Modifier la plante</a>
+            <div class="container mt-2">
+                {{ include('plante/_delete_form.html.twig') }} 
+            </div>
         </div>
-        <div class="container">{{ include('plante/_delete_form.html.twig') }}</div>
+        
     </div>
     
