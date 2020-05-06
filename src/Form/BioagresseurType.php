@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\Ravageur;
+use App\Entity\Bioagresseur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RavageurType extends AbstractType
+class BioagresseurType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,8 +17,6 @@ class RavageurType extends AbstractType
             ->add('periodesrisques')
             ->add('symptomes')
             ->add('stadesensible')
-            ->add('stadeactif')
-            ->add('nbgenerations')
             ->add('plantes_sensibles')
             ->add('organes')
             ->add('traitements')
@@ -28,7 +26,7 @@ class RavageurType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Ravageur::class,
+            'data_class' => Bioagresseur::class,
         ]);
     }
 }

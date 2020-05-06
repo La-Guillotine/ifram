@@ -2,7 +2,7 @@
     margin-top : 1vh;
     display :flex;
     flex-direction:row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-around;
 }
@@ -19,7 +19,7 @@
 .bio{
     display : flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     align-items: baseline;
     justify-content: space-around;
 }

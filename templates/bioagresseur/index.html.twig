@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bioagresseur index{% endblock %}
+
+{% block stylesheets %}<link rel="stylesheet" href="{{ asset('css/bioagresseurs.css') }}" />{% endblock %}
+
+{% block body %}
+    <h1>Bioagresseur index</h1>
+    <div class="container bioagresseurs">
+        <div class="maladies">
+            <h2>Maladies</h2>
+            <ul class="list-group">
+                {% for maladie in maladies %}
+                    <a class="list-group-item list-group-item-action col-md-8" href="{{ path('bioagresseur_show', {'id': maladie.id}) }}">   
+                        {{ maladie.nom }}
+                    </a>
+                {% else %}
+                    <li class="list-group-item list-group-item-action">no records found</p>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="ravageurs">
+            <h2>Ravageurs</h2>
+            <ul class="list-group">
+                {% for ravageur in ravageurs %}
+                    <a class="list-group-item list-group-item-action col-md-8" href="{{ path('bioagresseur_show', {'id': ravageur.id}) }}">   
+                        {{ ravageur.nom }}
+                    </a>
+                {% else %}
+                    <li class="list-group-item list-group-item-action">no records found</p>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <a class="btn btn-primary" href="{{ path('bioagresseur_new') }}">Create new</a>
+{% endblock %}

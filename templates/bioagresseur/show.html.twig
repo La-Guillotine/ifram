@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bioagresseur{% endblock %}
+
+{% block body %}
+    <h1>Bioagresseur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ bioagresseur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ bioagresseur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ bioagresseur.type }}</td>
+            </tr>
+            <tr>
+                <th>Periodesrisques</th>
+                <td>{{ bioagresseur.periodesrisques }}</td>
+            </tr>
+            <tr>
+                <th>Symptomes</th>
+                <td>{{ bioagresseur.symptomes }}</td>
+            </tr>
+            <tr>
+                <th>Stadesensible</th>
+                <td>{{ bioagresseur.stadesensible }}</td>
+            </tr>
+            
+            {% if bioagresseur.isinstanceofMaladie %}
+            <tr>
+                <th>Conditions favorables</th>
+                <td>{{ bioagresseur.conditionsfavorables }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <th>Nb générations</th>
+                <td>{{ bioagresseur.nbgenerations }}</td>
+            </tr>
+            <tr>
+                <th>Stade actif</th>
+                <td>{{ bioagresseur.stadeactif }}</td>
+            </tr>
+            {% endif %}
+            
+        </tbody>
+    </table>
+
+    <a class="btn btn-outline-primary" href="{{ path('bioagresseur_index') }}">Retour</a>
+
+    <a class="btn btn-outline-secondary" href="{{ path('bioagresseur_edit', {'id': bioagresseur.id}) }}">Modifier</a>
+
+    {{ include('bioagresseur/_delete_form.html.twig') }}
+{% endblock %}

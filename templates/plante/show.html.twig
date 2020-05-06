@@ -26,7 +26,7 @@
                     <div class="card-header"><p class="card-subtitle">Maladies</p></div>
                     <ul class="list-group list-group-flush">
                     {% for maladie in maladies %}
-                        <a class="card-link list-group-item" href="{{ path('maladie_show', {'id': maladie.id}) }}"> {{ maladie.nom }} </a>
+                        <a class="card-link list-group-item" href="{{ path('bioagresseur_show', {'id': maladie.id}) }}"> {{ maladie.nom }} </a>
                     {% else %}
                         <p>Aucune</p>
                     {% endfor %}
@@ -39,7 +39,7 @@
                     </div>
                     <ul class="list-group list-group-flush">
                     {% for ravageur in ravageurs %}
-                        <a class="card-link list-group-item" href="{{ path('ravageur_show', {'id':ravageur.id}) }}"> {{ ravageur.nom }} </a>
+                        <a class="card-link list-group-item" href="{{ path('bioagresseur_show', {'id':ravageur.id}) }}"> {{ ravageur.nom }} </a>
                     {% else %}
                         <p>Aucune</p>
                     {% endfor %}
@@ -47,7 +47,7 @@
                 </div>
             </div>
             {# liens #}
-            <a class="btn btn-secondary card-link mt-2" href="{{ path('plante_edit', {'id': plante.id}) }}">Modifier la plante</a>
+            <a class="btn btn-outline-secondary card-link mt-2" href="{{ path('plante_edit', {'id': plante.id}) }}">Modifier la plante</a>
             <div class="container mt-2">
                 {{ include('plante/_delete_form.html.twig') }} 
             </div>

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Bioagresseur{% endblock %}
+
+{% block body %}
+    <h1>Edit Bioagresseur</h1>
+
+    {{ include('bioagresseur/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('bioagresseur_index') }}">back to list</a>
+
+    {{ include('bioagresseur/_delete_form.html.twig') }}
+{% endblock %}

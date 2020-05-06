@@ -1,0 +1,11 @@
+.bioagresseurs{
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.bioagresseurs div{
+    flex:1 1 auto;
+}
