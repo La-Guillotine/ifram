@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/bioagresseur")
@@ -34,6 +36,7 @@ class BioagresseurController extends AbstractController
 
     /**
      * @Route("/new", name="bioagresseur_new", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request): Response
     {
@@ -67,6 +70,7 @@ class BioagresseurController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="bioagresseur_edit", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_USER')")
      */
     public function edit(Request $request, Bioagresseur $bioagresseur): Response
     {
@@ -87,6 +91,7 @@ class BioagresseurController extends AbstractController
 
     /**
      * @Route("/{id}", name="bioagresseur_delete", methods={"DELETE"})
+     * @Security("is_granted('ROLE_USER')")
      */
     public function delete(Request $request, Bioagresseur $bioagresseur): Response
     {

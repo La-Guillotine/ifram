@@ -11,6 +11,9 @@ use App\Service\FileUploader;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 /**
  * @Route("/plante")
  */
@@ -28,6 +31,7 @@ class PlanteController extends AbstractController
 
     /**
      * @Route("/new", name="plante_new", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_USER')")
      */
     public function new(Request $request, FileUploader $fileUploader): Response
     {
@@ -70,6 +74,7 @@ class PlanteController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="plante_edit", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_USER')")
      */
     public function edit(Request $request, Plante $plante, FileUploader $fileUploader): Response
     {
@@ -107,6 +112,7 @@ class PlanteController extends AbstractController
 
     /**
      * @Route("/{id}", name="plante_delete", methods={"DELETE"})
+     * @Security("is_granted('ROLE_USER')")
      */
     public function delete(Request $request, Plante $plante): Response
     {

@@ -18,9 +18,11 @@
                     <p>no records found</p>
                 {% endfor %}
             </div>
-            <div class="container-fluid mt-5">
-                <a class="btn btn-outline-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
-            </div>
+            {% if is_granted('ROLE_USER') %}
+                <div class="container-fluid mt-5">
+                    <a class="btn btn-outline-primary" href="{{ path('plante_new') }}">Ajouter une plante</a>
+                </div>
+            {% endif %}
         </div>
         <!-- Tab panes -->
         <div class="tab-content descPlantes">
