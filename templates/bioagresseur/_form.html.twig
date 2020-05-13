@@ -1,4 +1,14 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<select id="types">
+    {% for type in types|keys %}
+        <option value="bioagresseur_type_{{ loop.index }}">{{ type }}</option>
+    {% endfor %}
+</select>
+{% for form in forms %}
+    <div class="form d-none container" id="bioagresseur_type_{{ loop.index }}">
+        {{ form_start(form) }}
+            {{ form_label(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-success">{{ button_label|default('Valider') }}</button>
+        {{ form_end(form) }}
+    </div>
+{% endfor %}

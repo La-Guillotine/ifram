@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Bioagresseur;
 use App\Form\BioagresseurType;
+use App\Form\MaladieType;
+use App\Form\RavageurType;
 use App\Repository\BioagresseurRepository;
 use App\Repository\MaladieRepository;
 use App\Repository\RavageurRepository;
@@ -40,21 +42,41 @@ class BioagresseurController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $bioagresseur = new Bioagresseur();
-        $form = $this->createForm(BioagresseurType::class, $bioagresseur);
-        $form->handleRequest($request);
+        $forms = [];
+        $views = [];
+        $types = [
+            'maladie' => MaladieType::class,
+            'ravageur' => RavageurType::class
+        ];
+        // create the forms based on the types indicated in the types array
+        foreach($types as $type){
+            $forms[] = $this->createForm($type);
+        }
+        
+        if ($request->isMethod('POST')) {
+            foreach ($forms as $form) {
+                $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($bioagresseur);
-            $entityManager->flush();
+                if (!$form->isSubmitted()) continue; // no need to validate a form that isn't submitted
 
-            return $this->redirectToRoute('bioagresseur_index');
+                if ($form->isSubmitted() && $form->isValid()) {
+                    $objet = $form->getData();
+                    $entityManager = $this->getDoctrine()->getManager();
+                    $entityManager->persist($objet);
+                    $entityManager->flush();
+        
+                    return $this->redirectToRoute('bioagresseur_index');
+                } 
+            }
         }
 
+        
+        foreach ($forms as $form) {
+            $views[] = $form->createView();
+        }
         return $this->render('bioagresseur/new.html.twig', [
-            'bioagresseur' => $bioagresseur,
-            'form' => $form->createView(),
+            'forms' => $views,
+            'types' => $types
         ]);
     }
 
