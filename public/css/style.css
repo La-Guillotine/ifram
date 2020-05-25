@@ -11,3 +11,8 @@ select{
 form label{
     margin-right: 1vw;
 }
+
+.required:after{
+    content: "*";
+    color: red;
+}

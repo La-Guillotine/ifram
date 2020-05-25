@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-success">
+            <a class="navbar-brand" href="#">Institut Français de Recherche Agronomique</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('default') }}">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('plante_index') }}">Plantes</a>
+                </li>
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Bioagresseurs
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{{ path('bioagresseur_index') }}">Liste</a>
+                    <a class="dropdown-item" href="{{ path('bioagresseur_new_maladie') }}">Ajouter une Maladie</a>
+                    <a class="dropdown-item" href="{{ path('bioagresseur_new_ravageur') }}">Ajouter un Ravageur</a>
+                    </div>
+                </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('bioagresseur_index') }}">Bioagresseurs</a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('traitement_index') }}">Traitements</a>
+                </li>
+                {% if is_granted('ROLE_OBSERVATEUR') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('observation_index') }}">Observations</a>
+                    </li>
+                {% endif %}
+
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
+                {% endif %}
+                </ul>
+            </div>
+        </nav>

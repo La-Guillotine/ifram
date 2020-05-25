@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau ravageur{% endblock %}
+
+{% block body %}
+    <h1>Créer un ravageur</h1>
+
+    {{ include('bioagresseur/_form.html.twig') }}
+
+    <a href="{{ path('bioagresseur_index') }}">Retour à la liste</a>
+{% endblock %}

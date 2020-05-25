@@ -47,6 +47,39 @@
                 <td>{{ bioagresseur.stadeactif }}</td>
             </tr>
             {% endif %}
+
+            <tr>
+                <th>Plantes sensibles</th>
+                <td>
+                    {% for plante in bioagresseur.plantessensibles %}
+                        <a href="{{ path('plante_show', {id: plante.id}) }}">{{ plante.nom }}</a> {% if not loop.last %} - {% endif %}
+                    {% else %}
+                        Aucune
+                    {% endfor %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>Organes affectés</th>
+                <td>
+                    {% for organe in bioagresseur.organes %}
+                        {{ organe.nom }}</a> {% if not loop.last %} - {% endif %}
+                    {% else %}
+                        Aucun
+                    {% endfor %}
+                </td>
+            </tr>
+
+            <tr>
+                <th>Traitements</th>
+                <td>
+                    {% for traitement in bioagresseur.traitements %}
+                        <a href="{{ path('traitement_show', {id: traitement.id}) }}">{{ traitement.nom }}</a> {% if not loop.last %} - {% endif %}
+                    {% else %}
+                        Aucun
+                    {% endfor %}
+                </td>
+            </tr>
             
         </tbody>
     </table>

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Bioagresseur;
+use App\Entity\Maladie;
+use App\Entity\Ravageur;
 use App\Form\BioagresseurType;
 use App\Form\MaladieType;
 use App\Form\RavageurType;
@@ -37,46 +39,52 @@ class BioagresseurController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="bioagresseur_new", methods={"GET","POST"})
+     * @Route("/newMaladie", name="bioagresseur_new_maladie", methods={"GET","POST"})
      * @Security("is_granted('ROLE_USER')")
      */
-    public function new(Request $request): Response
+    public function newMaladie(Request $request): Response
     {
-        $forms = [];
-        $views = [];
-        $types = [
-            'maladie' => MaladieType::class,
-            'ravageur' => RavageurType::class
-        ];
-        // create the forms based on the types indicated in the types array
-        foreach($types as $type){
-            $forms[] = $this->createForm($type);
-        }
-        
-        if ($request->isMethod('POST')) {
-            foreach ($forms as $form) {
-                $form->handleRequest($request);
+        $maladie = new Maladie();
+        $form = $this->createForm(MaladieType::class, $maladie);
+        $form->handleRequest($request);
 
-                if (!$form->isSubmitted()) continue; // no need to validate a form that isn't submitted
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            
+           //var_dump($maladie->getOrganes());
+            $entityManager->persist($maladie);
+            $entityManager->flush();
 
-                if ($form->isSubmitted() && $form->isValid()) {
-                    $objet = $form->getData();
-                    $entityManager = $this->getDoctrine()->getManager();
-                    $entityManager->persist($objet);
-                    $entityManager->flush();
-        
-                    return $this->redirectToRoute('bioagresseur_index');
-                } 
-            }
+            return $this->redirectToRoute('bioagresseur_index');
         }
 
-        
-        foreach ($forms as $form) {
-            $views[] = $form->createView();
+        return $this->render('bioagresseur/new_maladie.html.twig', [
+            'maladie' => $maladie,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/newRavageur", name="bioagresseur_new_ravageur", methods={"GET","POST"})
+     * @Security("is_granted('ROLE_USER')")
+     */
+    public function newRavageur(Request $request): Response
+    {
+        $ravageur = new Ravageur();
+        $form = $this->createForm(RavageurType::class, $ravageur);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ravageur);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('bioagresseur_index');
         }
-        return $this->render('bioagresseur/new.html.twig', [
-            'forms' => $views,
-            'types' => $types
+
+        return $this->render('bioagresseur/new_ravageur.html.twig', [
+            'ravageur' => $ravageur,
+            'form' => $form->createView(),
         ]);
     }
 
